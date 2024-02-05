@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\FileController;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,3 +17,9 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+//Route::get('/files/{path}', [FileController::class, 'serve'])->where('path', '.*');
+Route::get('/files/uploads/{filename}', [FileController::class, 'serve']);
+
+
+

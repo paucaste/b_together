@@ -20,7 +20,10 @@ class User extends Authenticatable
     protected $fillable = [
         'name',
         'email',
+        'phone',
         'password',
+        'municipio_id',
+        'role'
     ];
 
     /**
@@ -42,4 +45,33 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+    // metodes pels rols organitzacio i votant
+    public function isOrganizacio()
+        {
+             return $this->role === 'organizacio';
+        }
+
+    public function isVotant()
+        {
+             return $this->role === 'votant';
+        }
+
+    public function assignRole($role)
+        {
+               $this->role = $role;
+             $this->save();
+        }
+
+    public function files()
+        {
+            return $this->hasMany(File::class);
+        }
+        
+    public function posts()
+    {
+        return $this->hasMany(Post::class);
+    }
+         
+
+
 }
